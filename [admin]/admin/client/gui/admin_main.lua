@@ -1027,6 +1027,14 @@ function aClientClick ( button )
 						aViewModdetails(player)
 					end
 				end
+			elseif ( getElementType ( source ) == "gui-label" ) then
+				if ( not ( guiGridListGetSelectedItem ( aTab1.PlayerList ) == -1 ) ) then
+					local name = guiGridListGetItemPlayerName ( aTab1.PlayerList, guiGridListGetSelectedItem( aTab1.PlayerList ), 1 )
+					local player = getPlayerFromName ( name )
+					if ( source == aTab1.IP ) then guiSetText ( aTab1.IP, "IP: "..aPlayers[player]["IP"] )
+					elseif ( source == aTab1.Serial ) then guiSetText ( aTab1.Serial, "Serial: "..aPlayers[player]["serial"] )
+					end
+				end
 			elseif ( source == aTab1.VehicleDropDown ) then
 				local x1, y1 = guiGetPosition ( aAdminForm, false )
 				local x2, y2 = guiGetPosition ( aTabPanel, false )
@@ -1054,8 +1062,8 @@ function aClientClick ( button )
 										..", Account Name: "..aPlayers[player]["accountname"]
 										..", D3D9.DLL: "..aPlayers[player]["d3d9dll"] )
 						end
-						guiSetText ( aTab1.IP, "IP: "..aPlayers[player]["IP"] )
-						guiSetText ( aTab1.Serial, "Serial: "..aPlayers[player]["serial"] )
+						guiSetText ( aTab1.IP, "IP: <click to reveal>" )
+						guiSetText ( aTab1.Serial, "Serial: <click to reveal>" )
 						--guiSetText ( aTab1.Username, "Community Username: "..aPlayers[player]["username"] )
 						guiSetText ( aTab1.Accountname, "Account Name: "..aPlayers[player]["accountname"] )
 						guiSetText ( aTab1.ACDetected, "AC Detected: "..aPlayers[player]["acdetected"] )
